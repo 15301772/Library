@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.BookMapper">
+
+    <resultMap id="map1" type="Bill">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="writer" column="writer"></result>
+        <result property="publishe" column="publishe"></result>
+        <result property="press" column="press"></result>
+        <association property="user" resultMap="user"></association>
+    </resultMap>
+    <resultMap id="user" type="com.pojo.User">
+        <id property="id" column="uid"></id>
+        <result property="name" column="uname"></result>
+    </resultMap>
+    <select id="selectBillList" resultMap="map1">
+        SELECT b.id,b.name,b.writer,b.publishe,b.press,u.name as uname,u.id as uid
+        FROM book AS b
+        LEFT JOIN borrow AS bo ON bo.bookId=b.id
+        LEFT JOIN USER AS u ON bo.userId = u.id
+        <where>
+            <if test="name!=null and name!=''">
+                and b.name = #{name}
+            </if>
+            <if test="writer!=null and writer!=''">
+                and b.writer = #{writer}
+            </if>
+            <if test="press!=null and press!=''">
+                and b.press = #{press}
+            </if>
+        </where>
+    </select>
+    <select id="selectBill2" resultType="Bill">
+        select * from book
+        <where>
+            <if test="name!=null and name!=''">
+            and name = #{name}
+        </if>
+            <if test="writer!=null and writer!=''">
+                and writer = #{writer}
+            </if>
+            <if test="press!=null and press!=''">
+                and press = #{press}
+            </if>
+        </where>
+    </select>
+    <select id="selectById" resultType="Bill">
+        select * from book where id = #{id}
+    </select>
+    <insert id="insertBook" parameterType="Bill">
+        insert into book (name,writer,publishe,press) values (#{name},#{writer},#{publishe},0);
+    </insert>
+    <delete id="deleteBook">
+        delete from book where id = #{id}
+    </delete>
+    <update id="updateBook" parameterType="Bill">
+        update book set name = #{name},writer = #{writer} ,publishe = #{publishe} where id = #{id};
+    </update>
+
+    <insert id="insertBorrow" parameterType="Borrow">
+        insert into borrow (userId,bookId) values (#{userId},#{userId});
+    </insert>
+
+    <update id="updatePress" parameterType="Bill">
+        update book set press =1 where id=#{id};
+    </update>
+</mapper>

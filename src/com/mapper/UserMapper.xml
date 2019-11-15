@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+    <resultMap id="map" type="user">
+        <id property="id" column="id"/>
+        <result property="account" column="account"></result>
+        <result property="password" column="password"></result>
+    </resultMap>
+    <select id="Login" parameterType="User" resultMap="map">
+        select * from user where account= #{account} and password=#{password}
+    </select>
+    <select id="selectUser" resultType="User">
+        select * from user
+        <where>
+            <if test="name!=null and name!=''">
+                name = #{name}
+            </if>
+        </where>
+    </select>
+    <select id="selectById" resultType="User">
+         select * from user where id = #{id}
+    </select>
+    <insert id="insertUser" parameterType="User">
+        insert into user (name,account,password,conpassword,sex,date,tel,address,root) values(#{name},#{account},#{password},#{conpassword},#{sex},#{date},#{tel},#{address},#{root})
+    </insert>
+    <delete id="deleteUser">
+        delete from user where id = #{id}
+    </delete>
+    <update id="updateUser" parameterType="User">
+        update user set name=#{name},sex=#{sex},date=#{date},tel=#{tel},address=#{address},root=#{root},headPath=#{headPath} where id = #{id};
+    </update>
+    <update id="pwdUpdate" parameterType="User">
+        update user set password=#{newpassword} where id = #{id};
+    </update>
+
+
+</mapper>
