@@ -9,6 +9,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -158,13 +159,15 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping("/check.action")
-    public String check(String name) {
-        int i = userDao.CheckUserName(name);
-        if (i > 0){
-            return "用户名已被注册";
-        }else {
-            return "用户名没有被注册可以使用";
-        }
+    public String check(String username) {
+        int i = userDao.CheckUserName(username);
+        return (i>0)? "用户名已被注册": "用户名没有被注册可以使用";
     }
 
+    @ResponseBody
+    @RequestMapping("/searchByWhere.action")
+    public List<User> searchByWhere(@RequestBody User user) {
+        List<User> users = userDao.searchByWhere(user);
+        return users;
+    }
 }

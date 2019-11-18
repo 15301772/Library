@@ -39,7 +39,10 @@ public class UserDaoImpl implements UserDao {
     public void pwdUpdate(User user) { mapper.pwdUpdate(user);}
 
     @Override
-    public int CheckUserName(String name) { return mapper.CheckUserName(name); }
+    public int CheckUserName(String username) { return mapper.CheckUserName(username); }
+
+    @Override
+    public List<User> searchByWhere(User user) { return mapper.searchByWhere(user); }
 
 }
 
