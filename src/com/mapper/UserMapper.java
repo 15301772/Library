@@ -13,4 +13,5 @@ public interface UserMapper {
     public void deleteUser(Integer id);
     public void updateUser(User user);
     public void pwdUpdate(User user);
+    public int CheckUserName(String name);
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -155,7 +156,15 @@ public class UserController {
         mav.setViewName("userList.jsp");
         return mav;
     }
-
-
+    @ResponseBody
+    @RequestMapping("/check.action")
+    public String check(String name) {
+        int i = userDao.CheckUserName(name);
+        if (i > 0){
+            return "用户名已被注册";
+        }else {
+            return "用户名没有被注册可以使用";
+        }
+    }
 
 }

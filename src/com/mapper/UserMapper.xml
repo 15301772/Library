@@ -34,6 +34,8 @@
     <update id="pwdUpdate" parameterType="User">
         update user set password=#{newpassword} where id = #{id};
     </update>
-
+    <select id="CheckUserName" parameterType="string" resultType="integer">
+        select count(*) from user where name = #{username}
+    </select>
 
 </mapper>

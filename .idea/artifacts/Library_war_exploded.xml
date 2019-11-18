@@ -49,6 +49,9 @@
           <element id="file-copy" path="E:/Tools/package/page/jsqlparser-0.9.5.jar" />
           <element id="file-copy" path="E:/Tools/package/file/commons-fileupload-1.2.2.jar" />
           <element id="file-copy" path="E:/Tools/package/file/commons-io-2.4.jar" />
+          <element id="file-copy" path="E:/Tools/package/springmvc加入json支持/jackson-annotations-2.4.0.jar" />
+          <element id="file-copy" path="E:/Tools/package/springmvc加入json支持/jackson-core-2.4.2.jar" />
+          <element id="file-copy" path="E:/Tools/package/springmvc加入json支持/jackson-databind-2.4.2.jar" />
         </element>
       </element>
     </root>
