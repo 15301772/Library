@@ -114,7 +114,6 @@ public class BookController {
         List<Bill> bills = billDao.selectBill2(bill1);
         mav.addObject("bills",bills);
         mav.setViewName("bill2.jsp");
-
         return mav;
     }
 }
