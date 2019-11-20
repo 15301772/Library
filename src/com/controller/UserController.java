@@ -30,6 +30,22 @@ public class UserController {
     @Autowired
     HttpServletRequest httpServletRequest;
 
+    @RequestMapping("/layui.action")
+    @ResponseBody
+    public String layui(@RequestBody User user) {
+        HttpSession session = httpServletRequest.getSession();
+        User user1 = userDao.Login(user);
+        if (user!=null){
+            session.setAttribute("user",user1);
+            String msg = "success";
+            return msg;
+        }else {
+            String msg = "fail";
+            return msg;
+        }
+
+    }
+
     @RequestMapping("/loginPage.action")
     public String loginPage() {
         return "login.jsp";
